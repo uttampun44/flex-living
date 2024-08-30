@@ -13,15 +13,15 @@ const TopNavigation: React.FC = () => {
           "topNavigation flex justify-between items-center py-3 px-[60px]"
         )}
       >
-        <div className="logo">
+        <div className={cn("logo w-[158px]")}>
           <Link href="/">
           
             <Image
               src={HeaderLogo}
               alt="headerLogo"
-              className={cn("")}
+              className={cn("w-full h-full")}
               quality={100}
-              loading="lazy"
+              priority={true}
             />
           </Link>
         </div>
