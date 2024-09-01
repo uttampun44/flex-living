@@ -10,6 +10,10 @@ const config: Config = {
     extend: {
      fontFamily:{
       "lato": ["Lato", "sans-serif"],
+     },
+     backgroundColor: {
+       "bg-card" : "#F2F0F2",
+       "bg-button-primary": "#064749"
      }
     },
   },
