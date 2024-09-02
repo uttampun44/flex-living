@@ -1,3 +1,5 @@
+     "use client"
+
 const Contact:React.FC = () =>{
     return(
         <>

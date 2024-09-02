@@ -1,3 +1,5 @@
+     "use client"
+  
 import imageIcon from "@/app/data/icon"
 import { cn } from "@/utils/cn";
 

@@ -1,3 +1,5 @@
+
+   "use client"
 import cardProps from "@/types/card"
 
 const Card:React.FC<cardProps> = ({children, className}) =>{

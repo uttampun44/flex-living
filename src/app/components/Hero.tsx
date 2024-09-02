@@ -1,3 +1,5 @@
+   "use client"
+
 import heroProps from "@/types/hero"
 
 const Hero:React.FC<heroProps> = ({children}) => {
