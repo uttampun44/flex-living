@@ -15,9 +15,13 @@ import Kenigston from "@/image/kenigston.jpg";
 import Thames from "@/image/thames.png";
 import HammerSmith from "@/image/hammersmith.jpg";
 import Button from "@/components/Button";
+import TopNavigation from "@/components/TopNavigation";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
+   <>
+       <TopNavigation />
     <main className={cn("")}>
       <section className={cn("heroSection")}>
         <Hero>
@@ -256,5 +260,7 @@ export default function Home() {
         </div>
       </section>
     </main>
+    <Footer />
+   </>
   );
 }

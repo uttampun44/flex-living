@@ -7,8 +7,8 @@ import { cookies } from "next/headers";
 // creating session login for admin
 export async function createSessionClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT);
+    .setEndpoint(process.env.NODE_ENV)
+    .setProject(process.env.NODE_ENV);
 
   const session = cookies().get("my-custom-session");
   if (!session || !session.value) {
@@ -27,9 +27,9 @@ export async function createSessionClient() {
 // creating admin client for login
 export async function createAdminClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT)
-    .setKey(process.env.NEXT_APPWRITE_KEY);
+    .setEndpoint(process.env.NODE_ENV)
+    .setProject(process.env.NODE_ENV)
+    .setKey(process.env.NODE_ENV);
 
   return {
     get account() {
