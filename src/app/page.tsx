@@ -1,3 +1,5 @@
+   "use client"
+
 import Image from "next/image";
 import { cn } from "@/utils/cn";
 import Hero from "@/components/Hero";

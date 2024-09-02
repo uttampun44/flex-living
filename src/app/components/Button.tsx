@@ -1,3 +1,4 @@
+ "use client"
 import Buttonprops from "@/types/button"
 
 const Button:React.FC<Buttonprops> = ({className, value, type, name}) =>{

@@ -1,3 +1,5 @@
+   "use client"
+   
 import HeroMessage from "@/types/heroMessage";
 import { cn } from "@/utils/cn";
 
