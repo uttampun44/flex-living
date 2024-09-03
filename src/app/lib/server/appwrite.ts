@@ -1,6 +1,6 @@
 
      "use server";
-import { Client, Account } from "node-appwrite";
+import { Client, Account, Databases } from "node-appwrite";
 import { cookies } from "next/headers";
 
 
@@ -9,8 +9,8 @@ export async function createSessionClient() {
  
   const client = new Client()
 
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_END_POINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPRWRITE_FLEX_LIVING!);
+    .setEndpoint(process.env.NEXT_PUBLIC_END_POINT)
+    .setProject(process.env.NEXT_PUBLIC_PROJECT_ID);
 
   const session = cookies().get("my-custom-session");
   if (!session || !session.value) {
@@ -29,25 +29,18 @@ export async function createSessionClient() {
 // creating admin client for login
 export async function createAdminClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_END_POINT! )
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!)
-    .setKey(process.env.NODE_ENV);
+    .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT )
+    .setProject(process.env.NEXT_PUBLIC_PROJECT_ID)
+    .setKey(process.env.NEXT_PUBLIC_API_KEY);
 
   return {
     get account() {
       return new Account(client);
     },
+    get databases() {
+      return new Databases(client)
+    }
   };
 }
 
-export async function getLoggedInUser() {
-  try {
-    const { account } = await createSessionClient();
-    return await account.get();
-  } catch (error) {
-    console.error('Failed to fetch logged-in user:', error);
-    return null;
-  }
-}
 
-  
