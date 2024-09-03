@@ -19,6 +19,7 @@ import TopNavigation from "@/components/TopNavigation";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+
   return (
    <>
        <TopNavigation />
