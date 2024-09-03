@@ -1,6 +1,5 @@
 "use client";
 
-import { getLoggedInUser } from "@/app/lib/server/appwrite";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { cn } from "@/utils/cn";
@@ -14,7 +13,12 @@ type formValues = {
   password: string;
 };
 
-const BackendLogin = async() => {
+const BackendLogin = () => {
+
+     const createSession = async() =>{
+        "use client"
+        console.log("Hello")
+     }
 
   const router = useRouter();
   const {
@@ -23,13 +27,7 @@ const BackendLogin = async() => {
     control,
   } = useForm<formValues>();
 
-  const user = await getLoggedInUser();
-
-  console.log(user)
-
-  // if (!user) redirect("/signup");
-
-  // redirect("/account");
+ 
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
