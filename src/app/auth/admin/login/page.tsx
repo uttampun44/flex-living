@@ -1,18 +1,20 @@
 "use client";
 
+import { getLoggedInUser } from "@/app/lib/server/appwrite";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
 
 type formValues = {
   email: string;
   password: string;
 };
 
-const BackendLogin = () => {
+const BackendLogin = async() => {
 
   const router = useRouter();
   const {
@@ -20,6 +22,14 @@ const BackendLogin = () => {
     handleSubmit,
     control,
   } = useForm<formValues>();
+
+  const user = await getLoggedInUser();
+
+  console.log(user)
+
+  // if (!user) redirect("/signup");
+
+  // redirect("/account");
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
