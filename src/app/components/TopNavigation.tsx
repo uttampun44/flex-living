@@ -21,7 +21,8 @@ const TopNavigation: React.FC = () => {
               alt="headerLogo"
               className={cn("w-full h-full")}
               quality={100}
-              priority={true}
+              priority={false}
+              loading="lazy"
             />
           </Link>
         </div>
