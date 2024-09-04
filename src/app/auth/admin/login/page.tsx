@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
+import { getLoggedInUser } from "@/app/lib/server/appwrite";
+import { useEffect, useState } from "react";
 
 type formValues = {
   email: string;
@@ -15,12 +17,10 @@ type formValues = {
 
 const BackendLogin = () => {
 
-     const createSession = async() =>{
-        "use client"
-        console.log("Hello")
-     }
-
   const router = useRouter();
+
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -29,7 +29,32 @@ const BackendLogin = () => {
 
  
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async(data) => {
+
+    console.log("dashboard")
+    router.push("/auth/dashboard")
+  });
+
+  useEffect(() =>{
+     const checkUser = async() =>{
+      const user = await getLoggedInUser();
+
+      if (!user) router.push("/")
+
+        setLoggedIn(true);
+        router.push("/auth/dashboard");
+
+        router.push("/auth/dashboard")
+
+    };
+    checkUser();
+     
+  }, [router])
+
+  if (isLoggedIn) {
+    
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
