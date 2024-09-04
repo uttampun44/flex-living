@@ -7,8 +7,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { getLoggedInUser } from "@/app/lib/server/appwrite";
+import { account } from "@/app/lib/server/appwrite";
 import { useEffect, useState } from "react";
+import { ID } from "node-appwrite";
 
 type formValues = {
   email: string;
@@ -16,45 +17,35 @@ type formValues = {
 };
 
 const BackendLogin = () => {
-
   const router = useRouter();
 
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-  } = useForm<formValues>();
+  const { register, handleSubmit, control } = useForm<formValues>();
 
- 
-
-  const onSubmit = handleSubmit(async(data) => {
-
-    console.log("dashboard")
-    router.push("/auth/dashboard")
-  });
-
-  useEffect(() =>{
-     const checkUser = async() =>{
-      const user = await getLoggedInUser();
-
-      if (!user) router.push("/")
-
-        setLoggedIn(true);
-        router.push("/auth/dashboard");
-
-        router.push("/auth/dashboard")
-
-    };
-    checkUser();
-     
-  }, [router])
-
-  if (isLoggedIn) {
+  const login = async (email: string, password: string) => {
+    try {
+     const session =  await account.createEmailPasswordSession(email, password);
     
-    return <p>Loading...</p>;
-  }
+      setLoggedIn(true);
+    } catch (error) {
+      throw new Error ('account not created')
+    }
+  };
+
+  
+  const onSubmit = async (data: formValues) => {
+    
+    console.log(data)
+   const session =  await login(data.email, data.password);
+   console.log(session);
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/auth/dashboard");
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <>
@@ -79,7 +70,7 @@ const BackendLogin = () => {
               </h1>
 
               <div className={cn("loginFormCotainer")}>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="formGrid grid gap-y-3">
                     <Controller
                       name="email"

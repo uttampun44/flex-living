@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
 
+  console.log(process.env.NEXT_PUBLIC_API_KEY)
   return (
    <>
        <TopNavigation />
@@ -33,6 +34,7 @@ export default function Home() {
               alt="heroImage"
               loading="lazy"
               className={cn("w-full")}
+              priority={false}
             />
           </div>
         </Hero>
